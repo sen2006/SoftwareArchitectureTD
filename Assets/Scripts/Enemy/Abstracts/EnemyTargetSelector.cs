@@ -2,7 +2,6 @@ using UnityEngine;
 
 public abstract class EnemyTargetSelector : MonoBehaviour
 {
-    public abstract GameObject GetTarget();
-
-    
+    public abstract Vector3 GetTarget();
+    public abstract void reachedTarget();
 }

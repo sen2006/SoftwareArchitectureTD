@@ -13,6 +13,7 @@ public class EnemyControler : MonoBehaviour
     EnemyMovement movement;
 
     [SerializeField] int speed = 10;
+    [SerializeField] float NodeDistance = .1f;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,7 @@ public class EnemyControler : MonoBehaviour
     void Update()
     {
         CheckHealth();
-        movement.SetTarget(targetSelector.GetTarget().transform.position);
+        HandleTargeting();
     }
 
     void CheckHealth()
@@ -42,5 +43,17 @@ public class EnemyControler : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void HandleTargeting()
+    {
+        Vector3 target = targetSelector.GetTarget();
+        float distance = (target - transform.position).magnitude;
+        if (distance <= NodeDistance)
+        {
+            targetSelector.reachedTarget();
+            target = targetSelector.GetTarget();
+        }
+        movement.SetTarget(target);
     }
 }

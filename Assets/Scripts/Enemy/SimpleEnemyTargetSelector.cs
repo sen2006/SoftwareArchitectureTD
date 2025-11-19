@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class SimpleEnemyTargetSelector : EnemyTargetSelector
+public class SimpleEnemyTargetSelector: EnemyTargetSelector
 {
-    [SerializeField] GameObject target;
+    [SerializeField] Transform target;
 
-    public override GameObject GetTarget()
+    public override Vector3 GetTarget()
     {
-        return target;
+        return target.position;
     }
+
+    public override void reachedTarget() { }
 }
